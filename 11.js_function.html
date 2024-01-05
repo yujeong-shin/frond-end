@@ -8,10 +8,88 @@
         function basicFunction(){
             alert("함수 호출 완료");
         }
+        function basicFunction2(){
+            alert(makeString3());
+        }
+        function makeString1(){
+            return "hello world1"
+        }
+        const makeString2 = function(){return "hello world2"};
+        const makeString3 = () => "hello world3";
+
+        function basicFunction3(name='Guest'){ //매개변수 디폴트값 탑재
+            alert("hello " + name)
+        }
+        function basicFunction4(a, b){
+             let total = a+b;
+            alert("합계: "+total)
+        }
+        function basicFunction5(...numbers){
+            //  const total= 0;
+            //  for(i=0; i<numbers.length; i++){
+            //     total += numbers[i];
+            //  }
+            const total= numbers.reduce((a,b)=>a+b, 0);
+            alert("합계: "+total)
+        }
     </script>
 </head>
 <body>
     <h2>js 기본 함수 호출</h2>
-    <button onclick="basicFunction()">함수 호출</button>
+    <button onclick="basicFunction()">함수 호출1</button>
+    <button onclick="basicFunction2()">함수 호출2</button>
+    <button onclick="basicFunction3('')">함수 호출3</button> <!--종종 발생할 수 있는 실수. -->
+    <button onclick="basicFunction4(2, 3)">함수 호출4</button>
+    <button onclick="basicFunction5(10,20,30,40)">함수 호출5</button>
+
+    <h2>계산기 프로그램</h2>
+    <div>
+        <label>사칙연산선택</label>
+        <input type="text" class="values">
+        <select id="calculator">
+            <option value="plus">덧셈</option>
+            <option value="minus">뺄셈</option>
+            <option value="multiply">곱셈</option>
+            <option value="divide">나눗셈</option>
+        </select>
+        <input type="text" class="values">
+        <button onclick="calculator()">연산실행</button>
+    </div>
+
+    <script>
+        function calculator(){
+            const what = document.getElementById("calculator").value;
+            console.log(what);
+
+            let operands = document.getElementsByClassName("values");
+            let operand1 = Number(operands[0].value);
+            let operand2 = Number(operands[1].value);
+
+            let result;
+            if(what === 'plus'){
+                result = operand1+operand2;
+            } else if (what === 'minus') {
+                result = operand1-operand2;
+            } else if (what === 'multiply') {
+                result = operand1*operand2;
+            } else if (what === 'divide') {
+                result = operand1/operand2;
+            }
+            document.getElementById("result").innerHTML = result;
+        }
+    </script>
+    <p id="result">결과</p>
+
+    <h2>이력서 입력</h2>
+    <div id="target"></div>
+    <button onclick="addItem()">항목추가</button>
+    <script>
+        let count = 1;
+        function addItem(){
+            let myTarget = document.getElementById("target");
+            myTarget.innerHTML += "<label>항목"+count+" </label><input type='text'><br>"
+            count++;
+        }
+    </script>
 </body>
 </html>

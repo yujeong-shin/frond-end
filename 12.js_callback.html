@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js callback</title>
+    <script>
+        //콜백함수 없음
+        function callBackExample1(callback){
+            alert("hello");
+        }
+        function callBackExample2(){ //myCallback1(name) 삽입
+            processUserInput((name) => console.log("안녕하세요 " + name + "님"));
+        }
+        function callBackExample3(){ //myCallback2(name) 삽입
+            processUserInput (name => alert("안녕하세요 " + name + "님"));
+        }
+        // function myCallback1(name){
+        //     console.log("안녕하세요 " + name + "님");
+        // }
+        // function myCallback2(name){
+        //     alert("안녕하세요 " + name + "님");
+        // }
+        function callBackExample4(){
+            const numbers = [1,2,3,4,5];
+            numbers.forEach(a => console.log(a));
+        }
+        function callBackExample5(){
+            //setTimeOUt함수는 대표적인 js의 비동기함수(콜백함수 처리함수)
+            //그외에 네트워크 작업을 수행하는 많은 함수가 비동기 함수로 설계
+            setTimeout(() => console.log("hello world 1"), 2000);
+            console.log("hello world 2");
+            setTimeout(() => console.log("hello world 3"), 2000);
+            console.log("hello world 4");
+        }
+        function processUserInput(callback){
+            let name = prompt("이름을 입력해주세요.");
+            callback(name);
+        }
+    </script>
+</head>
+<body>
+    <!-- 콜백함수 : 다른 함수 안에서 실행되는 함수 -->
+    <h2>콜백함수</h2>
+    <button onclick="callBackExample1()">일반함수 예제1</button>
+    <button onclick="callBackExample2()">콜백 예제2</button>
+    <button onclick="callBackExample3()">콜백 예제3</button>
+    <button onclick="callBackExample4()">콜백 예제4</button>
+    <button onclick="callBackExample5()">콜백 예제5</button>
+
+
+</body>
+</html>

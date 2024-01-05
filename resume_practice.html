@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이력서</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #d7c4aa;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        section {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #474747;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            color: #333;
+        }
+
+        button {
+            background-color: #6ccefc;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .delete-button {
+            background-color: #fe8ea0;
+        }
+
+        .added-div {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>이력서</h1>
+    </header>
+
+    <section>
+        <h2>개인 정보</h2>
+        <div class="input-group">
+            <label for="name">이름</label>
+            <input type="text" id="name" name="name">
+        </div>
+        <div class="input-group">
+            <label for="email">이메일</label>
+            <input type="email" id="email" name="email">
+        </div>
+        <div class="input-group">
+            <label for="bio">자기소개</label>
+            <textarea id="bio" name="bio" rows="5"></textarea>
+        </div>
+
+        <h2>경력</h2>
+        <!-- 동적으로 추가될 엘리먼트들을 감싸는 컨테이너 -->
+        <div id="container"></div>
+
+        <!-- 동적으로 추가될 엘리먼트를 추가할 버튼 -->
+        <button onclick="addNewTextarea()">추가</button>
+        <button class="delete-button" onclick="deleteLastTextarea()">삭제</button>
+    </section>
+
+    <script>
+        // textarea가 추가될 때마다 호출되는 변수
+        var count = 1;
+
+        // 동적으로 textarea를 추가하는 함수
+        function addNewTextarea() {
+            // 새로운 div 엘리먼트 생성
+            var newDiv = document.createElement('div');
+            newDiv.className = 'added-div'; // 클래스 추가 (CSS 스타일링을 위해)
+
+            // 새로운 레이블(label) 엘리먼트 생성
+            var newLabel = document.createElement('label');
+            newLabel.textContent = '경력 ' + count + ': ';
+            
+            // 새로운 textarea 엘리먼트 생성
+            var newTextarea = document.createElement('textarea');
+            newTextarea.rows = 5; // 행 수 설정 (원하는 크기로 조절 가능)
+
+            // div에 레이블, textarea 추가
+            newDiv.appendChild(newLabel);
+            newDiv.appendChild(newTextarea);
+
+            // 컨테이너에 새로운 div 추가
+            document.getElementById('container').appendChild(newDiv);
+
+            // count 변수 증가
+            count++;
+        }
+
+        // 마지막 항목 삭제하는 함수
+        function deleteLastTextarea() {
+            var container = document.getElementById('container');
+            var addedDivs = container.getElementsByClassName('added-div');
+
+            // 마지막 항목이 존재할 경우 삭제
+            if (addedDivs.length > 0) {
+                container.removeChild(addedDivs[addedDivs.length - 1]);
+                count--;
+            }
+        }
+    </script>
+</body>
+</html>

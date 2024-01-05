@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js callback hell</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+</body>
+<script>
+    async function callBackImprovement(){
+        // jquery > ajax (레거시 방식)
+        try{
+            const response1 = await $.ajax({
+                url: 'https://jsonplaceholder.typicode.com/posts/1',
+                type: 'GET',
+                dataType: 'json'
+            });
+            console.log("ajax : ");
+            console.log(response1);
+        }catch(e){
+            console.log(e);
+        }
+        // const response2 = await $.ajax({
+        //     url: 'https://naver.com',
+        //     type: 'POST',
+        //     dataType: 'json',
+        //     data: response1
+        // });
+        // console.log(response2);
+        // const response3 = await $.ajax({
+        //     url: 'https://daum.com',
+        //     type: 'POST',
+        //     dataType: 'json',
+        //     data: response2
+        // });
+        // console.log(response3);
+
+        //axios
+       /* HTTP 통신에 필요한 header data, status 등의 정보까지 나옴*/
+        try{
+            const response1 = await axios.get('https://jsonplaceholder.typicode.com/posts/1');
+            console.log("axios : ");
+            console.log(response1);
+            console.log(response1.date); //.id, .title을 통해 다른 것들도 확인 가능
+        }catch(e){
+            console.log(e);
+        }
+    }
+    callBackImprovement();
+</script>
+</html>
