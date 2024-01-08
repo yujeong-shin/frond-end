@@ -23,19 +23,19 @@
     <table class="table">
         <tr>
             <td>id : </td>
-            <td id="userId"></td>
+            <td id="idParam"></td>
         </tr>
         <tr>
             <td>title : </td>
-            <td id="title"></td>
+            <td id="titleParam"></td>
         </tr>
         <tr>
             <td>content : </td>
-            <td id="content"></td>
+            <td id="contentsParam"></td>
         </tr>
         <tr>
             <td>authorId : </td>
-            <td id="authorId"></td>
+            <td id="authorIdParam"></td>
         </tr>
     </table>
     </div>
@@ -43,18 +43,13 @@
         async function callBackImp() {
             try {
                 let myTarget = document.getElementsByClassName("table")[0];
-                let myPostNumber = document.getElementById("postNumber").value; // Use .value to get the content of the textarea
+                let myPostNumber = document.getElementById("postNumber").value;
                 const response = await axios.get('https://jsonplaceholder.typicode.com/posts/' + myPostNumber);
 
-                const userId = response.data.id;
-                const title = response.data.title;
-                const content = response.data.body; // 'content' should be 'body'
-                const authorId = response.data.userId; // 'authorId' should be 'userId'
-
-                document.getElementById("userId").innerHTML = userId;
-                document.getElementById("title").innerHTML = title;
-                document.getElementById("content").innerHTML = content;
-                document.getElementById("authorId").innerHTML = authorId;
+                document.getElementById("idParam").innerHTML = response.data.id;
+                document.getElementById("titleParam").innerHTML = response.data.title;
+                document.getElementById("contentsParam").innerHTML = response.data.body;
+                document.getElementById("authorIdParam").innerHTML = response.data.userId;
             } catch (e) {
                 console.log(e);
             }
